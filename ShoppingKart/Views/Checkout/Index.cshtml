@@ -1,0 +1,78 @@
+﻿@model IEnumerable<ShoppingKart.ViewModels.CheckoutDetail>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Checkout</h2>
+
+<div class="jumbotron">
+    <table class="table product-list-table">
+        <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            
+            <th>Offer</th>
+            <th>Total Price</th>
+            <th></th>
+            
+        </tr>
+        </thead>
+        <tbody>
+        @{
+            float totalPrice = 0f;
+            float totalPriceBeforeDiscount = 0f;
+            float reduction = 0f;
+            foreach (var item in Model)
+            {
+                
+                    totalPrice = totalPrice + item.ItemsPrice;
+                    totalPriceBeforeDiscount = totalPriceBeforeDiscount + item.PriceBeforeDiscount;
+                    reduction = totalPriceBeforeDiscount - totalPrice;
+                    <tr>
+                        <td>@item.ItemName</td>
+                        <td>£@item.SinglePrice</td>
+                        <td>@item.ItemQuantity</td>
+                        
+                        <td>
+                            @if (item.UsedOffer)
+                            {
+                                <span>@item.Offer.Number for £ @item.Offer.OfferedPrice</span>
+                            }
+                        </td>
+                        <td>£@item.ItemsPrice</td>
+                        <td>
+                            
+                            @using (Html.BeginForm("DeleteProductFromBasket", "Checkout", new {productId = item.ProductId}))
+                            {
+                                <button type="submit" class="btn btn-primary">Delete</button>
+                            }
+                        </td>
+                    </tr>
+                
+            }
+        }
+
+        </tbody>
+        <tfoot>
+        @if (reduction > 0f)
+        {
+            <tr>
+                <td colspan="4">Total before discount </td>
+                <td colspan="2">£@totalPriceBeforeDiscount</td>
+            </tr>
+            <tr>
+                <td colspan="4">Discount </td>
+                <td colspan="2">- £@reduction</td>
+            </tr>
+        }
+
+        <tr>
+            <td colspan="4">Total to pay</td>
+            <td colspan="2">£@totalPrice</td>
+            
+        </tr>
+        </tfoot>
+    </table>
+</div>

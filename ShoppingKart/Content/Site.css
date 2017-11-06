@@ -22,3 +22,44 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.number-box {
+    width: 40%;
+}
+
+.quantity-container {
+    display: inline;
+}
+
+.product-list-table {
+    border: 1px solid #6d6d6d;
+}
+
+.product-list-table th {
+    font-size: 12px;
+    background-color: #6d6d6d;
+    color: #ffffff;
+    font-weight: normal;
+    border: 1px solid #6d6d6d;
+}
+
+.product-list-table td {
+    border: 1px solid rgba(109, 109, 109, 0.3);
+}
+
+.product-list-table tr:nth-child(even) {
+    background-color: rgba(146, 146, 146, 0.3);
+}
+
+.product-list-table tr:hover {
+    background-color: rgba(146, 146, 146, 0.6) !important;
+}
+
+.product-list-table tr {
+    transition: 0.2s;
+}
+
+.product-list-table tr td {
+    font-size: 14px;
+    font-family: Verdana,Helvetica,Arial,sans-serif
+}

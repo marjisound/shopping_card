@@ -20,6 +20,11 @@ namespace ShoppingKart.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Product> Products { get; set; }
+        
+        public DbSet<Basket> BasketOrders { get; set; }
+        public DbSet<Offer> Offers { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
